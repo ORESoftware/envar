@@ -1,5 +1,5 @@
 {
-  "name": "@oresoftware/envar",
+  "name": "@oresoftware/envstr",
   "version": "0.0.1001",
   "description": "Semver-oriented TypeScript library skeleton.",
   "main": "dist/main.js",
@@ -35,5 +35,8 @@
     "@types/async": "^2.4.1",
     "@types/node": "^10.12.10",
     "@types/uuid": "^3.4.4"
+  },
+  "r2g": {
+    "test": "echo 'no-op'"
   }
 }

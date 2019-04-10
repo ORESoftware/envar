@@ -11,15 +11,17 @@ export const r2gSmokeTest = function () {
   return true;
 };
 
+type ErrValCb = (err: any, val?: string) => void;
+
 const values = {
   proc: null as ChildProcess,
-  cbs: new Map()
+  cbs: new Map<string,ErrValCb >()
 };
 
 const startListening = (k: ChildProcess) => {
   
   k.stdout.pipe(new JSONParser()).on('data', d => {
-  
+    
     if (!d.uuid) {
       console.error('No uuid found.');
       return;
@@ -44,17 +46,32 @@ export const getProc = (): ChildProcess => {
 };
 
 export const kill = (n: number) => {
-  return values.proc && values.proc.kill(<any>n);
+  values.proc && values.proc.kill(<any>n);
+  values.proc = null;
 };
 
 export const getEnvStrings = (strings: Array<string>, cb: (err: any, val?: Array<string>) => void) => {
   async.mapLimit(strings, 15, getEnvString, cb);
 };
 
-export const getEnvString = (v: string, cb: (err: any, val?: string) => void) => {
+export const getEnvString = (v: string, cb: ErrValCb) => {
   const id = uuid.v4();
   values.cbs.set(id, cb);
   getProc().stdin.write(` cat <<EOF\n{"uuid":"${id}","value":"${v}"}\nEOF\n`);
 };
 
+export const getEnvStringsp = (strings: Array<string>) => {
+  return new Promise((resolve, reject) => {
+    getEnvStrings(strings, (err, values) => {
+      err ? reject(err) : resolve(values);
+    });
+  });
+};
 
+export const getEnvStringp = (v: string) => {
+  return new Promise((resolve, reject) => {
+    getEnvString(v, (err, val) => {
+      err ? reject(err) : resolve(val);
+    });
+  });
+};
