@@ -55,7 +55,6 @@ export const getEnvString = (v: string, cb: (err: any, val?: string) => void) =>
   const id = uuid.v4();
   values.cbs.set(id, cb);
   getProc().stdin.write(` cat <<EOF\n{"uuid":"${id}","value":"${v}"}\nEOF\n`);
-  // getProc().stdin.write(` echo "{\"uuid\":\"${id}\",\"value\":\"${v}\"}";\n`);
 };
 
 
