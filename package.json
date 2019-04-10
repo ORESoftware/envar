@@ -1,0 +1,39 @@
+{
+  "name": "@oresoftware/envar",
+  "version": "0.0.1001",
+  "description": "Semver-oriented TypeScript library skeleton.",
+  "main": "dist/main.js",
+  "bin": {},
+  "types": "dist/main.d.ts",
+  "typings": "dist/main.d.ts",
+  "scripts": {
+    "test": "suman test",
+    "postinstall": "./assets/postinstall.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ORESoftware/envar.git"
+  },
+  "keywords": [
+    "typescript",
+    "library",
+    "skeleton",
+    "scaffold"
+  ],
+  "author": "TODO Yo.Mama",
+  "license": "SEE LICENSE IN license.md",
+  "bugs": {
+    "url": "https://github.com/ORESoftware/envar/issues"
+  },
+  "homepage": "https://github.com/ORESoftware/envar#readme",
+  "dependencies": {
+    "@oresoftware/json-stream-parser": "0.0.109",
+    "async": "^2.6.2",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/async": "^2.4.1",
+    "@types/node": "^10.12.10",
+    "@types/uuid": "^3.4.4"
+  }
+}
